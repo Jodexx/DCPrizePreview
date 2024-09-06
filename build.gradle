@@ -15,10 +15,16 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven {
+        name "JodexIndustries"
+        url "https://repo.jodexindustries.xyz/releases"
+    }
 }
 
 dependencies {
     compileOnly "org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT"
+    compileOnly("com.jodexindustries.donatecase:DonateCaseAPI:2.2.5.9")
+    compileOnly("org.jetbrains:annotations:24.0.0")
 }
 
 def targetJavaVersion = 8
@@ -44,6 +50,9 @@ processResources {
     inputs.properties props
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
+        expand props
+    }
+    filesMatching('addon.yml') {
         expand props
     }
 }
